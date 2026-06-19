@@ -1,0 +1,15 @@
+{
+	"name": "lakehouse-adf-ms01",
+	"properties": {
+		"trustModeClaimForMi": {
+			"value": "Disabled",
+			"editable": true
+		}
+	},
+	"location": "northeurope",
+	"identity": {
+		"type": "SystemAssigned",
+		"principalId": "3543c9b6-494b-41f7-84bc-4b52d7ffface",
+		"tenantId": "1b56cce2-1550-4687-8cd1-995a961d6d9f"
+	}
+}
