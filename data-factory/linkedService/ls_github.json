@@ -4,7 +4,7 @@
 		"annotations": [],
 		"type": "HttpServer",
 		"typeProperties": {
-			"url": "https://github.com/mudarshullar2/azure-e2e-lakehouse",
+			"url": "https://raw.githubusercontent.com/mudarshullar2/azure-e2e-lakehouse/main/",
 			"enableServerCertificateValidation": true,
 			"authenticationType": "Anonymous"
 		}
