@@ -11,6 +11,10 @@
 			"type": "secureString",
 			"metadata": "Secure string for 'password' of 'AzureSqlDatabase1'"
 		},
+		"ls_databricks_accountKey": {
+			"type": "secureString",
+			"metadata": "Secure string for 'accountKey' of 'ls_databricks'"
+		},
 		"AzureSqlDatabase1_properties_typeProperties_server": {
 			"type": "string",
 			"defaultValue": "lakehouse-sql-ms01.database.windows.net"
@@ -26,6 +30,10 @@
 		"ls_github_properties_typeProperties_url": {
 			"type": "string",
 			"defaultValue": "https://raw.githubusercontent.com/mudarshullar2/azure-e2e-lakehouse/main/"
+		},
+		"ls_databricks_properties_typeProperties_url": {
+			"type": "string",
+			"defaultValue": "https://lakehouseadlsms01.dfs.core.windows.net/"
 		},
 		"containerUri": {
 			"type": "string",
@@ -57,6 +65,9 @@
 					"AzureSqlDatabase1_password": {
 						"value": "[parameters('AzureSqlDatabase1_password')]"
 					},
+					"ls_databricks_accountKey": {
+						"value": "[parameters('ls_databricks_accountKey')]"
+					},
 					"AzureSqlDatabase1_properties_typeProperties_server": {
 						"value": "[parameters('AzureSqlDatabase1_properties_typeProperties_server')]"
 					},
@@ -68,6 +79,9 @@
 					},
 					"ls_github_properties_typeProperties_url": {
 						"value": "[parameters('ls_github_properties_typeProperties_url')]"
+					},
+					"ls_databricks_properties_typeProperties_url": {
+						"value": "[parameters('ls_databricks_properties_typeProperties_url')]"
 					}
 				}
 			},
