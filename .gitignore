@@ -4,4 +4,4 @@
 crash.log
 *.tfvars
 !*.tfvars.example
-*.idea
+*.idea/
