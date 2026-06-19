@@ -91,3 +91,11 @@ resource "azurerm_mssql_firewall_rule" "allow_my_ip" {
   start_ip_address = var.my_ip
   end_ip_address   = var.my_ip
 }
+
+resource "azurerm_databricks_workspace" "dbw" {
+  name                = "${var.prefix}-dbw-${var.name_suffix}"
+  resource_group_name = azurerm_resource_group.rg.name
+  location            = var.location
+  sku                 = "premium"
+  tags                = var.tags
+}
