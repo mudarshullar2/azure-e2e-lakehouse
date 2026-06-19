@@ -2,7 +2,7 @@
 	"name": "data_source_SalesData",
 	"properties": {
 		"linkedServiceName": {
-			"referenceName": "HttpServer1",
+			"referenceName": "ls_github",
 			"type": "LinkedServiceReference"
 		},
 		"annotations": [],
