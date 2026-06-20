@@ -11,7 +11,7 @@
 			"location": {
 				"type": "AzureBlobFSLocation",
 				"folderPath": "raw_data",
-				"fileSystem": "bronze"
+				"fileSystem": "landing-zone"
 			},
 			"compressionCodec": "snappy"
 		},
