@@ -36,9 +36,13 @@ resource "azurerm_storage_account" "adls" {
   tags = var.tags
 }
 
-resource "azurerm_storage_data_lake_gen2_filesystem" "layers" {
-  for_each = toset(["bronze", "silver", "gold"])
-  name = each.key
+resource "azurerm_storage_data_lake_gen2_filesystem" "landing_zone" {
+  name = "landing-zone"
+  storage_account_id = azurerm_storage_account.adls.id
+}
+
+resource "azurerm_storage_data_lake_gen2_filesystem" "unity_metastore" {
+  name = "unity-metastore"
   storage_account_id = azurerm_storage_account.adls.id
 }
 
