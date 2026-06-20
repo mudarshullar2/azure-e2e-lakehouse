@@ -27,13 +27,13 @@
 			"type": "string",
 			"defaultValue": "sqladmin"
 		},
-		"ls_github_properties_typeProperties_url": {
-			"type": "string",
-			"defaultValue": "https://raw.githubusercontent.com/mudarshullar2/azure-e2e-lakehouse/main/"
-		},
 		"ls_databricks_properties_typeProperties_url": {
 			"type": "string",
 			"defaultValue": "https://lakehouseadlsms01.dfs.core.windows.net/"
+		},
+		"ls_github_properties_typeProperties_url": {
+			"type": "string",
+			"defaultValue": "https://raw.githubusercontent.com/mudarshullar2/azure-e2e-lakehouse/main/"
 		},
 		"containerUri": {
 			"type": "string",
@@ -77,11 +77,11 @@
 					"AzureSqlDatabase1_properties_typeProperties_userName": {
 						"value": "[parameters('AzureSqlDatabase1_properties_typeProperties_userName')]"
 					},
-					"ls_github_properties_typeProperties_url": {
-						"value": "[parameters('ls_github_properties_typeProperties_url')]"
-					},
 					"ls_databricks_properties_typeProperties_url": {
 						"value": "[parameters('ls_databricks_properties_typeProperties_url')]"
+					},
+					"ls_github_properties_typeProperties_url": {
+						"value": "[parameters('ls_github_properties_typeProperties_url')]"
 					}
 				}
 			},

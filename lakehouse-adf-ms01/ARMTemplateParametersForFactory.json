@@ -20,11 +20,11 @@
 		"AzureSqlDatabase1_properties_typeProperties_userName": {
 			"value": "sqladmin"
 		},
-		"ls_github_properties_typeProperties_url": {
-			"value": "https://raw.githubusercontent.com/mudarshullar2/azure-e2e-lakehouse/main/"
-		},
 		"ls_databricks_properties_typeProperties_url": {
 			"value": "https://lakehouseadlsms01.dfs.core.windows.net/"
+		},
+		"ls_github_properties_typeProperties_url": {
+			"value": "https://raw.githubusercontent.com/mudarshullar2/azure-e2e-lakehouse/main/"
 		}
 	}
 }
