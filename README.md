@@ -6,7 +6,7 @@ An end-to-end data engineering project that ingests raw car sales data, processe
 
 This project takes a car sales dataset from a flat CSV source and moves it through a full Azure lakehouse pipeline: ingestion with Azure Data Factory, layered processing and governance with Azure Databricks and Unity Catalog, and a dimensional (star schema) model in the gold layer that serves business intelligence tools. The supporting Azure infrastructure is provisioned with Terraform, and the Databricks processing is orchestrated as a scheduled job.
 
-## Architecture
+## Solution Architecture
 
 ![Solution architecture](docs/solution_architecture.png)
 
