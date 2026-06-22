@@ -35,6 +35,19 @@ pip install holidays
 from pyspark.sql import functions as F
 from pyspark.sql.window import Window
 import holidays
+from pyspark.sql.types import (
+    StructType, StructField, IntegerType, DateType, StringType, BooleanType
+)
+
+# fixing an issue: feb 29th, 2019 (not a leap year)
+# to test
+'''
+(df_gold.select("date_id","day","month","year").distinct()
+    .filter((F.col("month")==2) & (F.col("day")==29))
+    .display())
+'''
+
+df_gold = df_gold.withColumn("day", F.when((F.col("date_id") == "DT00794"), F.lit(28)).otherwise(F.col("day")))
 
 date_dim = (
     df_gold.select("date_id", "day", "month", "year").distinct()
@@ -61,9 +74,33 @@ date_dim = (
     .drop("holiday_date")
 )
 
+# adding unknown members
+unknown_schema = StructType([
+    StructField("date_key", IntegerType(), False),
+    StructField("date_id", StringType(), True),
+    StructField("day", IntegerType(), True),
+    StructField("month", IntegerType(), True),
+    StructField("year", IntegerType(), True),
+    StructField("quarter", IntegerType(), True),
+    StructField("week", IntegerType(), True),
+    StructField("full_date", DateType(), True),
+    StructField("holiday_name", StringType(), True),
+    StructField("is_holiday", BooleanType(), False)
+])
+
+unknown_date = spark.createDataFrame(
+    [(-1, "-1", None, None, None, None, None, None, "Unknown", False,)], schema=unknown_schema)
+
+date_dim = date_dim.unionByName(unknown_date)
+
 # COMMAND ----------
 
 display(date_dim.limit(5))
+
+# COMMAND ----------
+
+# checking unknown members
+date_dim.filter(F.col("date_id") == "-1").display()
 
 # COMMAND ----------
 
@@ -76,6 +113,18 @@ branch_dim = branch_dim.withColumn(
     F.row_number().over(Window.orderBy("branch_id"))
 )
 
+# add unknown members
+unknown_schema = StructType([
+    StructField("branch_id", StringType(), True),
+    StructField("branch_name", StringType(), True),
+    StructField("branch_key", IntegerType(), False)
+])
+
+unknown_branch = spark.createDataFrame(
+    [("Unknown", "Unknown", -1)], schema=unknown_schema)
+
+branch_dim = branch_dim.unionByName(unknown_branch)
+
 display(branch_dim.limit(5))
 
 # COMMAND ----------
@@ -86,6 +135,19 @@ dealer_dim = dealer_dim.withColumn(
     "dealer_key",
     F.row_number().over(Window.orderBy("dealer_id"))
 )
+
+# add unknown members
+unknown_schema = StructType([
+    StructField("dealer_id", StringType(), True),
+    StructField("dealer_name", StringType(), True),
+    StructField("dealer_key", IntegerType(), False)
+])
+
+unknown_dealer = spark.createDataFrame(
+    [("Unknown", "Unknown", -1)], schema=unknown_schema)
+
+dealer_dim = dealer_dim.unionByName(unknown_dealer)
+
 display(dealer_dim.limit(5))
 
 # COMMAND ----------
@@ -96,6 +158,18 @@ model_dim = model_dim.withColumn(
     "model_key",
     F.row_number().over(Window.orderBy("model_id"))
 )
+
+unknown_schema = StructType([
+    StructField("model_id", StringType(), True),
+    StructField("model_category", StringType(), True),
+    StructField("product_name", StringType(), True),
+    StructField("model_key", IntegerType(), False)
+])
+unknown_model = spark.createDataFrame(
+    [("Unknown", "Unknown", "Unknown", -1)], schema=unknown_schema)
+
+model_dim = model_dim.unionByName(unknown_model)
+
 display(model_dim.limit(5))
 
 # COMMAND ----------
@@ -107,6 +181,10 @@ sales_fact = (
     .join(branch_dim, on="branch_id", how="left")
     .join(dealer_dim, on="dealer_id", how="left")
     .join(model_dim, on="model_id", how="left")
+    .withColumn("date_key", F.coalesce("date_key", F.lit(-1)))
+    .withColumn("branch_key", F.coalesce("branch_key", F.lit(-1)))
+    .withColumn("dealer_key", F.coalesce("dealer_key", F.lit(-1)))
+    .withColumn("model_key", F.coalesce("model_key", F.lit(-1)))
     .select(
         "date_key", "branch_key", "dealer_key", "model_key",
         "units_sold", "unit_revenue", "total_revenue"
