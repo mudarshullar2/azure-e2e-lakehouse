@@ -1,0 +1,21 @@
+resources:
+  jobs:
+    Data_Pipeline:
+      name: Data-Pipeline
+      tasks:
+        - task_key: silver_data
+          notebook_task:
+            notebook_path: /Workspace/CarsProject/silver_notebook
+            source: WORKSPACE
+        - task_key: gold_data
+          depends_on:
+            - task_key: silver_data
+          notebook_task:
+            notebook_path: /Workspace/CarsProject/gold_notebook
+            source: WORKSPACE
+      queue:
+        enabled: true
+      parameters:
+        - name: incremental_flag
+          default: "1"
+      performance_target: PERFORMANCE_OPTIMIZED
