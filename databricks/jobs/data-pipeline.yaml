@@ -3,7 +3,13 @@ resources:
     Data_Pipeline:
       name: Data-Pipeline
       tasks:
+        - task_key: bronze_data
+          notebook_task:
+            notebook_path: /Workspace/CarsProject/bronze_notebook
+            source: WORKSPACE
         - task_key: silver_data
+          depends_on:
+            - task_key: bronze_data
           notebook_task:
             notebook_path: /Workspace/CarsProject/silver_notebook
             source: WORKSPACE
