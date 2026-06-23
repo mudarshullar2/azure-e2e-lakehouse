@@ -1,0 +1,49 @@
+table model_dimension
+	lineageTag: 42ad0527-961a-4acb-b628-c3df3e5d6d32
+
+	column model_id
+		dataType: string
+		lineageTag: 5cd3c695-6f89-4f33-872d-04d086a90393
+		summarizeBy: none
+		sourceColumn: model_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column model_category
+		dataType: string
+		lineageTag: 32b167cb-ce01-4df5-9a44-4e46ed8b82c6
+		summarizeBy: none
+		sourceColumn: model_category
+
+		annotation SummarizationSetBy = Automatic
+
+	column product_name
+		dataType: string
+		lineageTag: 61d702b8-6245-434f-9f58-90706c202c48
+		summarizeBy: none
+		sourceColumn: product_name
+
+		annotation SummarizationSetBy = Automatic
+
+	column model_key
+		dataType: int64
+		formatString: 0
+		lineageTag: 8e0912d7-27dd-4dfb-83b1-f2fe9faa0f16
+		summarizeBy: none
+		sourceColumn: model_key
+
+		annotation SummarizationSetBy = Automatic
+
+	partition model_dimension = m
+		mode: import
+		source =
+				let
+				    Source = Databricks.Catalogs("adb-7405615707680302.2.azuredatabricks.net", "/sql/1.0/warehouses/3cfed39e0adb828a", [Catalog=null, Database=null, QueryTags=null, EnableAutomaticProxyDiscovery=null, Implementation="2.0", Protocol=null]),
+				    cars_catalog_Database = Source{[Name="cars_catalog",Kind="Database"]}[Data],
+				    gold_Schema = cars_catalog_Database{[Name="gold",Kind="Schema"]}[Data],
+				    model_dimension_Table = gold_Schema{[Name="model_dimension",Kind="Table"]}[Data]
+				in
+				    model_dimension_Table
+
+	annotation PBI_ResultType = Table
+

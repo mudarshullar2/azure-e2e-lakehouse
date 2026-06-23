@@ -1,0 +1,39 @@
+table dealer_dimension
+	lineageTag: e9afb442-1d30-483f-a7ca-f3c1d3b4a0ff
+
+	column dealer_id
+		dataType: string
+		lineageTag: 3bd7c720-1ace-482d-9ad2-e26452ce3b9b
+		summarizeBy: none
+		sourceColumn: dealer_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column dealer_name
+		dataType: string
+		lineageTag: 4b0d2ce1-60d6-4bc1-8bb7-ad3db7359eaa
+		summarizeBy: none
+		sourceColumn: dealer_name
+
+		annotation SummarizationSetBy = Automatic
+
+	column dealer_key
+		dataType: int64
+		formatString: 0
+		lineageTag: 57d4f2d4-62d3-4ba0-9ac6-c2656d82c832
+		summarizeBy: none
+		sourceColumn: dealer_key
+
+		annotation SummarizationSetBy = Automatic
+
+	partition dealer_dimension = m
+		mode: import
+		source =
+				let
+				    Source = Databricks.Catalogs("adb-7405615707680302.2.azuredatabricks.net", "/sql/1.0/warehouses/3cfed39e0adb828a", [Catalog=null, Database=null, QueryTags=null, EnableAutomaticProxyDiscovery=null, Implementation="2.0", Protocol=null]),
+				    cars_catalog_Database = Source{[Name="cars_catalog",Kind="Database"]}[Data],
+				    gold_Schema = cars_catalog_Database{[Name="gold",Kind="Schema"]}[Data],
+				    dealer_dimension_Table = gold_Schema{[Name="dealer_dimension",Kind="Table"]}[Data]
+				in
+				    dealer_dimension_Table
+

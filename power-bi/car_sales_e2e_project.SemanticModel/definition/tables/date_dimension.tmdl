@@ -1,0 +1,109 @@
+table date_dimension
+	lineageTag: 8fadeb2f-c569-46f3-a2b0-e8e0fe177077
+
+	column date_id
+		dataType: string
+		lineageTag: 3cc94056-fea7-4f06-996e-fdc033b7b011
+		summarizeBy: none
+		sourceColumn: date_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column day
+		dataType: int64
+		formatString: 0
+		lineageTag: d760af0a-d060-4b57-994a-1fa8fe58e847
+		summarizeBy: sum
+		sourceColumn: day
+
+		annotation SummarizationSetBy = Automatic
+
+	column month
+		dataType: int64
+		formatString: 0
+		lineageTag: 0abad17b-96f0-41ed-b9fa-661ac21255ed
+		summarizeBy: sum
+		sourceColumn: month
+
+		annotation SummarizationSetBy = Automatic
+
+	column year
+		dataType: int64
+		formatString: 0
+		lineageTag: 4182be42-6f5e-46c9-b7ae-eed297f4a2f6
+		summarizeBy: sum
+		sourceColumn: year
+
+		annotation SummarizationSetBy = Automatic
+
+	column full_date
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 8077562a-7eea-4eb4-b4d6-2b5f6ee7fe38
+		summarizeBy: none
+		sourceColumn: full_date
+
+		variation Variation
+			isDefault
+			relationship: d16495cc-ce41-4bcc-96de-b2e09d663656
+			defaultHierarchy: LocalDateTable_b08dac5f-dc7a-4c5c-b36e-1f0dfdcf880a.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column quarter
+		dataType: int64
+		formatString: 0
+		lineageTag: 7cc5e7dc-0c2e-416e-969b-47969026b454
+		summarizeBy: sum
+		sourceColumn: quarter
+
+		annotation SummarizationSetBy = Automatic
+
+	column week
+		dataType: int64
+		formatString: 0
+		lineageTag: 43e9f507-86b5-4d2c-8545-64d88d7c5b9c
+		summarizeBy: sum
+		sourceColumn: week
+
+		annotation SummarizationSetBy = Automatic
+
+	column date_key
+		dataType: int64
+		formatString: 0
+		lineageTag: e4d25569-8f4c-4639-a94a-606ab9629834
+		summarizeBy: none
+		sourceColumn: date_key
+
+		annotation SummarizationSetBy = Automatic
+
+	column holiday_name
+		dataType: string
+		lineageTag: 6eecc393-9d7f-4ee8-9c95-aec7ed972bb5
+		summarizeBy: none
+		sourceColumn: holiday_name
+
+		annotation SummarizationSetBy = Automatic
+
+	column is_holiday
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: 567894f5-65fd-49c7-948f-6d4ef4329f9b
+		summarizeBy: none
+		sourceColumn: is_holiday
+
+		annotation SummarizationSetBy = Automatic
+
+	partition date_dimension = m
+		mode: import
+		source =
+				let
+				    Source = Databricks.Catalogs("adb-7405615707680302.2.azuredatabricks.net", "/sql/1.0/warehouses/3cfed39e0adb828a", [Catalog=null, Database=null, QueryTags=null, EnableAutomaticProxyDiscovery=null, Implementation="2.0", Protocol=null]),
+				    cars_catalog_Database = Source{[Name="cars_catalog",Kind="Database"]}[Data],
+				    gold_Schema = cars_catalog_Database{[Name="gold",Kind="Schema"]}[Data],
+				    date_dimension_Table = gold_Schema{[Name="date_dimension",Kind="Table"]}[Data]
+				in
+				    date_dimension_Table
+

@@ -1,0 +1,11 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
+  "metadata": {
+    "type": "Report",
+    "displayName": "car_sales_e2e_project"
+  },
+  "config": {
+    "version": "2.0",
+    "logicalId": "8e928dbc-d726-4ac9-83d9-415199a34e5c"
+  }
+}
