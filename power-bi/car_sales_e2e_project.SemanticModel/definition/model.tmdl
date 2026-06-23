@@ -1,0 +1,24 @@
+model Model
+	culture: en-US
+	defaultPowerBIDataSourceVersion: powerBI_V3
+	sourceQueryCulture: de-DE
+	dataAccessOptions
+		legacyRedirects
+		returnErrorValuesAsNull
+
+annotation __PBI_TimeIntelligenceEnabled = 1
+
+annotation PBI_QueryOrder = ["branch_dimension","date_dimension","dealer_dimension","sales_fact","model_dimension"]
+
+annotation PBI_ProTooling = ["DevMode"]
+
+ref table branch_dimension
+ref table date_dimension
+ref table DateTableTemplate_97171286-c871-46e6-aa9c-d2bfc75f804c
+ref table LocalDateTable_b08dac5f-dc7a-4c5c-b36e-1f0dfdcf880a
+ref table dealer_dimension
+ref table sales_fact
+ref table model_dimension
+
+ref cultureInfo en-US
+

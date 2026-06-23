@@ -1,0 +1,122 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.10.0/schema.json",
+  "name": "db8ebf2511dc6b312be0",
+  "position": {
+    "x": 0,
+    "y": 0,
+    "z": 0,
+    "height": 350.76923076923077,
+    "width": 366.15384615384619,
+    "tabOrder": 0
+  },
+  "visual": {
+    "visualType": "clusteredColumnChart",
+    "query": {
+      "queryState": {
+        "Category": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "date_dimension"
+                    }
+                  },
+                  "Property": "is_holiday"
+                }
+              },
+              "queryRef": "date_dimension.is_holiday",
+              "nativeQueryRef": "is_holiday",
+              "active": true
+            }
+          ]
+        },
+        "Y": {
+          "projections": [
+            {
+              "field": {
+                "Aggregation": {
+                  "Expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "sales_fact"
+                        }
+                      },
+                      "Property": "total_revenue"
+                    }
+                  },
+                  "Function": 0
+                }
+              },
+              "queryRef": "Sum(sales_fact.total_revenue)",
+              "nativeQueryRef": "total_revenue"
+            }
+          ]
+        }
+      },
+      "sortDefinition": {
+        "sort": [
+          {
+            "field": {
+              "Aggregation": {
+                "Expression": {
+                  "Column": {
+                    "Expression": {
+                      "SourceRef": {
+                        "Entity": "sales_fact"
+                      }
+                    },
+                    "Property": "total_revenue"
+                  }
+                },
+                "Function": 0
+              }
+            },
+            "direction": "Descending"
+          }
+        ],
+        "isDefaultSort": true
+      }
+    },
+    "drillFilterOtherVisuals": true
+  },
+  "filterConfig": {
+    "filters": [
+      {
+        "name": "8204c4cdda06d04de30b",
+        "field": {
+          "Aggregation": {
+            "Expression": {
+              "Column": {
+                "Expression": {
+                  "SourceRef": {
+                    "Entity": "sales_fact"
+                  }
+                },
+                "Property": "total_revenue"
+              }
+            },
+            "Function": 0
+          }
+        },
+        "type": "Advanced"
+      },
+      {
+        "name": "bb6e97019a98e6b23d69",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "date_dimension"
+              }
+            },
+            "Property": "is_holiday"
+          }
+        },
+        "type": "Categorical"
+      }
+    ]
+  }
+}

@@ -1,0 +1,39 @@
+table branch_dimension
+	lineageTag: 12ceda98-e3cd-4e41-a648-96fbf7ba2ac5
+
+	column branch_id
+		dataType: string
+		lineageTag: e9a09926-2fc1-42b5-99ae-fd098af2ca91
+		summarizeBy: none
+		sourceColumn: branch_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column branch_name
+		dataType: string
+		lineageTag: bfa78c58-907e-42bc-9755-5ddf71abe10f
+		summarizeBy: none
+		sourceColumn: branch_name
+
+		annotation SummarizationSetBy = Automatic
+
+	column branch_key
+		dataType: int64
+		formatString: 0
+		lineageTag: 47f633f8-ffed-4d2a-83b1-18c8a7fac312
+		summarizeBy: none
+		sourceColumn: branch_key
+
+		annotation SummarizationSetBy = Automatic
+
+	partition branch_dimension = m
+		mode: import
+		source =
+				let
+				    Source = Databricks.Catalogs("adb-7405615707680302.2.azuredatabricks.net", "/sql/1.0/warehouses/3cfed39e0adb828a", [Catalog=null, Database=null, QueryTags=null, EnableAutomaticProxyDiscovery=null, Implementation="2.0", Protocol=null]),
+				    cars_catalog_Database = Source{[Name="cars_catalog",Kind="Database"]}[Data],
+				    gold_Schema = cars_catalog_Database{[Name="gold",Kind="Schema"]}[Data],
+				    branch_dimension_Table = gold_Schema{[Name="branch_dimension",Kind="Table"]}[Data]
+				in
+				    branch_dimension_Table
+

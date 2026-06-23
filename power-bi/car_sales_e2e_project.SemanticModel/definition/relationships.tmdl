@@ -1,0 +1,21 @@
+relationship d16495cc-ce41-4bcc-96de-b2e09d663656
+	joinOnDateBehavior: datePartOnly
+	fromColumn: date_dimension.full_date
+	toColumn: LocalDateTable_b08dac5f-dc7a-4c5c-b36e-1f0dfdcf880a.Date
+
+relationship AutoDetected_8c967f90-ec2c-4ce6-a456-c01b7328c41d
+	fromColumn: sales_fact.branch_key
+	toColumn: branch_dimension.branch_key
+
+relationship AutoDetected_00521705-5f71-4eae-ab74-c3332a4f1603
+	fromColumn: sales_fact.date_key
+	toColumn: date_dimension.date_key
+
+relationship AutoDetected_f3109b03-7bf1-430b-8856-d29c0a63294d
+	fromColumn: sales_fact.dealer_key
+	toColumn: dealer_dimension.dealer_key
+
+relationship AutoDetected_4c090db5-7933-4af4-aeb8-50ecdf5ac83e
+	fromColumn: sales_fact.model_key
+	toColumn: model_dimension.model_key
+

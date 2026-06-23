@@ -1,0 +1,122 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.10.0/schema.json",
+  "name": "03e037ba0ad1407e4427",
+  "position": {
+    "x": 9.72644376899696,
+    "y": 353.06990881458967,
+    "z": 2,
+    "height": 366.68693009118545,
+    "width": 599.14893617021278,
+    "tabOrder": 2
+  },
+  "visual": {
+    "visualType": "barChart",
+    "query": {
+      "queryState": {
+        "Category": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "model_dimension"
+                    }
+                  },
+                  "Property": "model_category"
+                }
+              },
+              "queryRef": "model_dimension.model_category",
+              "nativeQueryRef": "model_category",
+              "active": true
+            }
+          ]
+        },
+        "Y": {
+          "projections": [
+            {
+              "field": {
+                "Aggregation": {
+                  "Expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "sales_fact"
+                        }
+                      },
+                      "Property": "units_sold"
+                    }
+                  },
+                  "Function": 0
+                }
+              },
+              "queryRef": "Sum(sales_fact.units_sold)",
+              "nativeQueryRef": "Sum of units_sold"
+            }
+          ]
+        }
+      },
+      "sortDefinition": {
+        "sort": [
+          {
+            "field": {
+              "Aggregation": {
+                "Expression": {
+                  "Column": {
+                    "Expression": {
+                      "SourceRef": {
+                        "Entity": "sales_fact"
+                      }
+                    },
+                    "Property": "units_sold"
+                  }
+                },
+                "Function": 0
+              }
+            },
+            "direction": "Descending"
+          }
+        ],
+        "isDefaultSort": true
+      }
+    },
+    "drillFilterOtherVisuals": true
+  },
+  "filterConfig": {
+    "filters": [
+      {
+        "name": "4eab5e706927081022e0",
+        "field": {
+          "Aggregation": {
+            "Expression": {
+              "Column": {
+                "Expression": {
+                  "SourceRef": {
+                    "Entity": "sales_fact"
+                  }
+                },
+                "Property": "units_sold"
+              }
+            },
+            "Function": 0
+          }
+        },
+        "type": "Advanced"
+      },
+      {
+        "name": "2720bba8db50a399de4b",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "model_dimension"
+              }
+            },
+            "Property": "model_category"
+          }
+        },
+        "type": "Categorical"
+      }
+    ]
+  }
+}

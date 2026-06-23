@@ -1,0 +1,77 @@
+table sales_fact
+	lineageTag: ad8d5e84-4224-4754-97d9-63f109dd6a12
+
+	column date_key
+		dataType: int64
+		formatString: 0
+		lineageTag: 01fdd65f-9afb-466f-884f-accb653a1ec5
+		summarizeBy: none
+		sourceColumn: date_key
+
+		annotation SummarizationSetBy = Automatic
+
+	column branch_key
+		dataType: int64
+		formatString: 0
+		lineageTag: 10e82dcb-9925-40ff-aaff-c4fc82642db1
+		summarizeBy: none
+		sourceColumn: branch_key
+
+		annotation SummarizationSetBy = Automatic
+
+	column dealer_key
+		dataType: int64
+		formatString: 0
+		lineageTag: e0742da4-b025-4429-8317-7b37d59fa58e
+		summarizeBy: none
+		sourceColumn: dealer_key
+
+		annotation SummarizationSetBy = Automatic
+
+	column model_key
+		dataType: int64
+		formatString: 0
+		lineageTag: 423e97e2-0222-48ac-bc41-b3b76e18782a
+		summarizeBy: none
+		sourceColumn: model_key
+
+		annotation SummarizationSetBy = Automatic
+
+	column units_sold
+		dataType: int64
+		formatString: 0
+		lineageTag: f0198a53-4ce0-44d4-9cea-26b2e43332bb
+		summarizeBy: sum
+		sourceColumn: units_sold
+
+		annotation SummarizationSetBy = Automatic
+
+	column unit_revenue
+		dataType: int64
+		formatString: 0
+		lineageTag: 964f7e12-2474-4267-a79e-a7964808a924
+		summarizeBy: sum
+		sourceColumn: unit_revenue
+
+		annotation SummarizationSetBy = Automatic
+
+	column total_revenue
+		dataType: int64
+		formatString: 0
+		lineageTag: 05cd140a-61f4-4f73-a231-0b9b3e4a25f3
+		summarizeBy: sum
+		sourceColumn: total_revenue
+
+		annotation SummarizationSetBy = Automatic
+
+	partition sales_fact = m
+		mode: import
+		source =
+				let
+				    Source = Databricks.Catalogs("adb-7405615707680302.2.azuredatabricks.net", "/sql/1.0/warehouses/3cfed39e0adb828a", [Catalog=null, Database=null, QueryTags=null, EnableAutomaticProxyDiscovery=null, Implementation="2.0", Protocol=null]),
+				    cars_catalog_Database = Source{[Name="cars_catalog",Kind="Database"]}[Data],
+				    gold_Schema = cars_catalog_Database{[Name="gold",Kind="Schema"]}[Data],
+				    sales_fact_Table = gold_Schema{[Name="sales_fact",Kind="Table"]}[Data]
+				in
+				    sales_fact_Table
+
