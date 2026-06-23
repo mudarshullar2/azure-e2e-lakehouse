@@ -51,7 +51,7 @@ The gold star schema is connected to Power BI through a Databricks SQL Warehouse
 
 ## Repository Structure
 
-\`\`\`
+```
 azure-e2e-lakehouse/
 ├── data-source/      # Car sales dataset (CSV) and the data generator script
 ├── data-factory/     # Azure Data Factory pipeline definitions
@@ -64,7 +64,7 @@ azure-e2e-lakehouse/
 │   ├── watermark.sql   # Watermark table for incremental loads
 │   └── procedure.sql   # Stored procedure to advance the watermark
 └── README.md
-\`\`\`
+```
 
 ## Pipeline Flow
 
